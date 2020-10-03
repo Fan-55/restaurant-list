@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const Restaurant = require('./models/restaurant')
+const Handlebars = require('handlebars')
 const port = 3000
 
 mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -29,6 +30,24 @@ app.get('/', (req, res) => {
     .lean()
     .then((restaurants) => {
       res.render('index', { restaurants })
+    })
+    .catch(error => console.log(error))
+})
+
+app.get('/search', (req, res) => {
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      const keyword = req.query.keyword.trim()
+      if (keyword.length === 0) {
+        return res.redirect('/')
+      }
+      let targetRestaurants = []
+      targetRestaurants = targetRestaurants.concat(restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase())))
+
+      targetRestaurants = targetRestaurants.concat(restaurants.filter(restaurant => restaurant.category.toLowerCase().includes(keyword.toLowerCase())))
+
+      res.render('index', { restaurants: targetRestaurants, keyword })
     })
     .catch(error => console.log(error))
 })
@@ -100,4 +119,10 @@ app.post('/restaurants/:id/delete', (req, res) => {
 
 app.listen(port, () => {
   console.log(`This app is listening at http://localhost:${port}`)
+})
+
+Handlebars.registerHelper("if_empty", (a, options) => {
+  if (a.length === 0) {
+    return options.fn(this)
+  }
 })
