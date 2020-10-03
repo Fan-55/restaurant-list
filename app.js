@@ -33,6 +33,27 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+
+app.post('/restaurants/', (req, res) => {
+  const addedItems = req.body
+  Restaurant.create({
+    name: addedItems.name,
+    name_en: addedItems.name_en,
+    category: addedItems.category,
+    image: addedItems.image,
+    location: addedItems.location,
+    phone: addedItems.phone,
+    google_map: addedItems.google_map,
+    rating: addedItems.rating,
+    description: addedItems.description
+  })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id)
