@@ -104,11 +104,6 @@ a:hover {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.footer {
-  height: 100px;
-  background-image: url(https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg);
-}
-
 @media screen and (max-width: 768px) {
   
   .restaurant-show-title {
