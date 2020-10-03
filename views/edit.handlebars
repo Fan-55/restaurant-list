@@ -14,11 +14,7 @@
               類別：
             </span>
           </div>
-          <select class="form-control" name="category">
-            <option value="{{restaurant.category}}">{{restaurant.category}}</option>
-            {{#each categoryList}}
-            <option value="{{this}}">{{this}}</option>
-            {{/each}}
+          <input type="text" name="category" value="{{restaurant.category}}" class="form-control">
           </select>
         </div>
 

@@ -44,21 +44,10 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 app.get('/restaurants/:id/edit', (req, res) => {
-  Restaurant.find()
+  const id = req.params.id
+  Restaurant.findById(id)
     .lean()
-    .then((restaurants) => {
-      //generate category list
-      let categoryList = []
-      restaurants.forEach(restaurant => categoryList.push(restaurant.category))
-      categoryList = [...new Set(categoryList)]
-
-      //find target restaurant
-      const id = req.params.id
-      const restaurant = restaurants.find(restaurant => restaurant._id.toString() === id)
-
-      //render the edit page
-      res.render('edit', { restaurant, categoryList })
-    })
+    .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
 
