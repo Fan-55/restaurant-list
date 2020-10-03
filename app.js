@@ -31,6 +31,16 @@ app.get('/', (req, res) => {
     })
 })
 
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => {
+      console.log(restaurant)
+      res.render('detail', { restaurant })
+    })
+})
+
 app.listen(port, () => {
   console.log(`This app is listening at http://localhost:${port}`)
 })
