@@ -20,7 +20,7 @@ db.once('open', () => {
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
-  helpers: require('./units/hbsHelpers')
+  helpers: require('./utils/hbsHelpers')
 }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
