@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const Restaurant = require('./models/restaurant')
-const Handlebars = require('handlebars')
 const port = 3000
 
 mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -19,7 +18,10 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  helpers: require('./units/hbsHelpers')
+}))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
@@ -111,10 +113,4 @@ app.post('/restaurants/:id/delete', (req, res) => {
 
 app.listen(port, () => {
   console.log(`This app is listening at http://localhost:${port}`)
-})
-
-Handlebars.registerHelper("if_empty", (a, options) => {
-  if (a.length === 0) {
-    return options.fn(this)
-  }
 })
