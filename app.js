@@ -57,17 +57,16 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 app.post('/restaurants/', (req, res) => {
-  const addedItems = req.body
   Restaurant.create({
-    name: addedItems.name,
-    name_en: addedItems.name_en,
-    category: addedItems.category,
-    image: addedItems.image,
-    location: addedItems.location,
-    phone: addedItems.phone,
-    google_map: addedItems.google_map,
-    rating: addedItems.rating,
-    description: addedItems.description
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
   })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
@@ -93,16 +92,9 @@ app.get('/restaurants/:id/edit', (req, res) => {
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const editedItems = req.body
   Restaurant.findById(id)
     .then((restaurant) => {
-      restaurant.name = editedItems.name
-      restaurant.category = editedItems.category
-      restaurant.location = editedItems.location
-      restaurant.google_map = editedItems.google_map
-      restaurant.phone = editedItems.phone
-      restaurant.description = editedItems.description
-      restaurant.image = editedItems.image
+      restaurant = Object.assign(restaurant, req.body)
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
