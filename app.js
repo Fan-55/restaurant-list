@@ -47,7 +47,7 @@ app.get('/search', (req, res) => {
 
       targetRestaurants = targetRestaurants.concat(restaurants.filter(restaurant => restaurant.category.toLowerCase().includes(keyword.toLowerCase())))
 
-      res.render('index', { restaurants: targetRestaurants, keyword })
+      res.render('search', { restaurants: targetRestaurants, keyword })
     })
     .catch(error => console.log(error))
 })
