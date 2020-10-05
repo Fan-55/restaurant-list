@@ -39,7 +39,7 @@
 
       <div class="footer d-flex justify-content-center mb-5">
         <a href="/restaurants/{{restaurant._id}}/edit" class="btn btn-info mr-1">Edit</a>
-        <form action="/restaurants/{{restaurant._id}}/delete" method="POST" class="mr-1">
+        <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" class="mr-1">
           <button class="btn btn-danger delete" type="submit">Delete</button>
         </form>
         <a href="/" class="btn btn-success">Back To Home Page</a>
