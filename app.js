@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 const port = 3000
 
@@ -23,8 +24,10 @@ app.engine('handlebars', exphbs({
   helpers: require('./utils/hbsHelpers')
 }))
 app.set('view engine', 'handlebars')
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 
 //set routing
 app.get('/', (req, res) => {
@@ -92,7 +95,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id)
     .then((restaurant) => {
