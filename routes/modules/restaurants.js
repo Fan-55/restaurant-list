@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     description: req.body.description
   })
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(err => console.log(err))
 })
 
 router.get('/:id', (req, res) => {
