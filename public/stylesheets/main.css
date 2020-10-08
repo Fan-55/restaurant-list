@@ -115,3 +115,20 @@ a:hover {
     font-size: 2rem;
   }
 }
+
+#new-form-container {
+  border: 1px solid rgb(233, 233, 233);
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+#new-form {
+ position: relative;
+  top: -25px;
+}
+
+@media screen and (min-width: 576px) {
+  #new-form {
+    max-width: 600px;
+  }
+}
