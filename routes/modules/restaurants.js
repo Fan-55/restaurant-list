@@ -59,4 +59,10 @@ router.delete('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+router.get('/', (req, res) => {
+
+  res.send('sorting working')
+
+})
+
 module.exports = router
