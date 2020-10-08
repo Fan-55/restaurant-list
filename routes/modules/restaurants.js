@@ -60,9 +60,17 @@ router.delete('/:id', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-
-  res.send('sorting working')
-
+  const queryString = req.query.sort
+  const condition = req.query.sort.split(':')
+  const filter = {}
+  filter[condition[0]] = condition[1]
+  Restaurant.find()
+    .lean()
+    .sort(filter)
+    .then((restaurants) => {
+      res.render('index', { restaurants, queryString })
+    })
+    .catch(error => console.log(error))
 })
 
 module.exports = router

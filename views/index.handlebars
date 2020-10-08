@@ -23,11 +23,11 @@
       <form action="/restaurants" id="sort-select" method="GET" class="d-flex justify-content-end">
         <select name="sort" form="sort-select" onchange="this.form.submit()">
           <option value="" disabled selected>Sort</option>
-          <option value="name_en:asc">店名：A -> Z</option>
-          <option value="name_en:desc">店名：Z -> A</option>
-          <option value="rating:asc">評分：高 -> 低</option>
-          <option value="rating:desc">評分：低 -> 高</option>
-          <option value="category:asc">種類</option>
+          <option value="name:asc" {{#if_equal queryString 'name:asc'}}selected{{/if_equal}}>店名：A -> Z</option>
+          <option value="name:desc" {{#if_equal queryString 'name:desc'}}selected{{/if_equal}}>店名：Z -> A</option>
+          <option value="rating:desc" {{#if_equal queryString 'rating:desc'}}selected{{/if_equal}}>評分：高 -> 低</option>
+          <option value="rating:asc" {{#if_equal queryString 'rating:asc'}}selected{{/if_equal}}>評分：低 -> 高</option>
+          <option value="category:asc" {{#if_equal queryString 'category:asc'}}selected{{/if_equal}}>種類</option>
         </select>
       </form>
     </div>

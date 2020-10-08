@@ -8,5 +8,10 @@ module.exports = {
     if (a.length !== 0) {
       return options.fn(this)
     }
+  },
+  if_equal: function (a, b, options) {
+    if (a === b) {
+      return options.fn(this)
+    }
   }
 }
