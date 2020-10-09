@@ -3,7 +3,7 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const getCategoryList = require('../../utils/getCategoryList')
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Restaurant.find()
     .lean()
     .then(restaurants => {
@@ -13,7 +13,10 @@ router.get('/', (req, res) => {
 
       res.render('search', { layout: 'withSearchBar', restaurants: targetRestaurants, keyword, categoryList })
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      next(error)
+    })
 })
 
 module.exports = router

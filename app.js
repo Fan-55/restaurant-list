@@ -21,6 +21,21 @@ app.use(bodyParser.json())
 app.use(methodOverride('_method'))
 app.use(routes)
 
+//error handling middlewares
+app.use((req, res, next) => {
+  const error = new Error('Not found')
+  error.status = 404
+  next(error)
+})
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500)
+  if (error.status !== 404) {
+    error.status = 500
+  }
+  res.render('error', { error })
+})
+
 app.listen(port, () => {
   console.log(`This app is listening at http://localhost:${port}`)
 })
