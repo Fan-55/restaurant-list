@@ -30,12 +30,14 @@
     </div>
     {{/each}}
   </div>
-  <div class="text-center mb-3">
-    <a href="/" class="btn btn-success">Back To Home Page</a>
-  </div>
+
   {{#if_empty restaurants}}
   <div class="alert alert-primary" role="alert">
     No search result!
   </div>
   {{/if_empty}}
+
+  <div class="text-center mb-3">
+    <a href="/" class="btn btn-success">Back To Home Page</a>
+  </div>
 </div>

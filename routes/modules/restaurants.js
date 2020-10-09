@@ -3,10 +3,12 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const getCategoryList = require('../../utils/getCategoryList')
 
+//get the restaurant creation page
 router.get('/new', (req, res, next) => {
   res.render('new')
 })
 
+//Create a new restaurant to the list
 router.post('/', (req, res, next) => {
   Restaurant.create({
     name: req.body.name,
@@ -26,6 +28,7 @@ router.post('/', (req, res, next) => {
     })
 })
 
+//Read the detail page of chosen restaurant
 router.get('/:id', (req, res, next) => {
   const id = req.params.id
   Restaurant.findById(id)
@@ -45,6 +48,7 @@ router.get('/:id', (req, res, next) => {
     })
 })
 
+//Read the edit page of chosen restaurant
 router.get('/:id/edit', (req, res, next) => {
   const id = req.params.id
   Restaurant.findById(id)
@@ -59,10 +63,12 @@ router.get('/:id/edit', (req, res, next) => {
     })
     .catch(error => {
       console.log(error)
+      error.message = 'Incorrect _id type'
       next(error)
     })
 })
 
+//Update the chosen restaurant
 router.put('/:id', (req, res, next) => {
   const id = req.params.id
   Restaurant.findById(id)
@@ -77,6 +83,7 @@ router.put('/:id', (req, res, next) => {
     })
 })
 
+//Delete the chosen restaurant
 router.delete('/:id', (req, res, next) => {
   const id = req.params.id
   Restaurant.findById(id)
@@ -88,11 +95,12 @@ router.delete('/:id', (req, res, next) => {
     })
 })
 
+//Route for sorting function
 router.get('/', (req, res, next) => {
   const queryString = req.query.sort
-  const condition = req.query.sort.split(':')
+  const [target, method] = req.query.sort.split(':')
   const filter = {}
-  filter[condition[0]] = condition[1]
+  filter[target] = method
   Restaurant.find()
     .lean()
     .sort(filter)
