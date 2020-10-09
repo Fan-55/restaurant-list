@@ -8,18 +8,20 @@ This is a web application for you to list whatever restaurant you like.
 ### Features
 ---
 - searching restaurants by title
-- searching restaurants by category
+- filtering restaurants by category using "餐廳種類" dropdown menu
 - clicking the restaurant image or title to see its detail information 
-- clicking the "Add a new restaurant" button to create a new item to the list
-- clicking "Edit" button to modify the detail information of certain restaurant
+- clicking the "create" button to create a new item to the list
+- clicking "Edit" button to modify the detail information of chosen restaurant
 - clicking "Delete" button to remove the restaurant from the list
+- Using sorting dropdown menu to arrange restaurants
 
 ### UX Features
 ---
-- confirm message will pop up before deletion
+- confirmation message will pop up before deletion
+- confirmation message will pop up before quitting editing
 - reminder of no search result 
-- reminder of empty search keyword
-- if search keyword only consists of spaces, user will be redirected to the home page.
+- reminder of no restaurant on the list 
+- if search keyword only consists of spaces or is empty, user won't be able to submit the query.
 
 ### How to use
 ---
@@ -87,3 +89,4 @@ http://localhost:3000
 - mongoose: v5.10.7
 - MongoDB: v4.2.9
 - Robo 3T: v1.4.1
+- method-override: v3.0.0
