@@ -30,6 +30,34 @@
     <div class="banner"></div>
   </header>
   <main>
+    <!-- search bar -->
+    <div class="container search-bar">
+      <div class="search-bar-outer">
+        <div class="search-bar-inner">
+          <form action="/search">
+            <h4 class="mb-2">尋找餐廳：</h4>
+            <div class="input-group">
+              <input type="text" name="keyword" class="form-control" id="search-input" placeholder="輸入餐廳名稱"
+                aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button" required>
+              <div class="input-group-append">
+                <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+          <div class="dropdown mt-1">
+            <button class="btn btn-major dropdown-toggle" type="button" id="category-filter" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              餐廳種類
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {{#each categoryList}}
+              <a class="dropdown-item" href="/filter?category={{this}}">{{this}}</a>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     {{{body}}}
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -41,6 +69,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
+  <script src="/javascripts/searchBar.js"></script>
 </body>
 
 </html>

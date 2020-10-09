@@ -4,11 +4,13 @@ const Restaurant = require('../../models/restaurant')
 const getCategoryList = require('../../utils/getCategoryList')
 
 router.get('/', (req, res) => {
+  const targetCategory = req.query.category
   Restaurant.find()
     .lean()
-    .then((restaurants) => {
+    .then(restaurants => {
       const categoryList = getCategoryList(restaurants)
-      res.render('index', { layout: 'withSearchBar', restaurants, categoryList })
+      const targetRestaurants = restaurants.filter(restaurant => restaurant.category === targetCategory)
+      res.render('search', { layout: 'withSearchBar', restaurants: targetRestaurants, categoryList })
     })
     .catch(error => console.log(error))
 })

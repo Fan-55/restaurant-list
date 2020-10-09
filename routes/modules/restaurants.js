@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
+const getCategoryList = require('../../utils/getCategoryList')
 
 router.get('/new', (req, res) => {
   res.render('new')
@@ -68,7 +69,8 @@ router.get('/', (req, res) => {
     .lean()
     .sort(filter)
     .then((restaurants) => {
-      res.render('index', { restaurants, queryString })
+      const categoryList = getCategoryList(restaurants)
+      res.render('index', { layout: 'withSearchBar', restaurants, queryString, categoryList })
     })
     .catch(error => console.log(error))
 })
