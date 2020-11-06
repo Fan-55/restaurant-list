@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -27,6 +28,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+require('./config/passport')
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(routes)
 
 //error handling middlewares

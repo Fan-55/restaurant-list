@@ -1,0 +1,27 @@
+<h1 class="mb-1 restaurant-show-title">會員登入</h1>
+
+<form action="/users/login" method="POST" id="new-form" class="mx-auto">
+  <div class="container" id="new-form-container">
+    <div class="row">
+
+      <div class="form-group col-12">
+        <label for="email" class="font-weight-bold">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="請輸入Email" required>
+      </div>
+
+      <div class="form-group col-12">
+        <label for="password" class="font-weight-bold">密碼:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密碼" required>
+      </div>
+
+    </div>
+
+    <button type=" submit" class="btn btn-primary d-block mx-auto">登入</button>
+
+  </div>
+</form>
+
+<div class="wrapper mt-2 mb-5 text-center">
+  沒有帳號?
+  <a href="/users/register">註冊</a>
+</div>
