@@ -1,29 +1,29 @@
 <h1 class="mb-1 restaurant-show-title">會員註冊</h1>
 
 <form action="/users/register" method="POST" id="new-form" class="mx-auto">
-  <small style="color:#4592af;">下列皆為必填欄位</small>
+  <small style="color:#4592af;">必填欄位*</small>
   <div class="container" id="new-form-container">
     <div class="row">
 
       <div class="form-group col-12">
         <label for="name" class="font-weight-bold">姓名:</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="請輸入姓名" value="{{name}}" required>
+        <input type="text" class="form-control" id="name" name="name" placeholder="請輸入姓名" value="{{name}}">
       </div>
 
       <div class="form-group col-12">
-        <label for="email" class="font-weight-bold">Email:</label>
+        <label for="email" class="font-weight-bold">*Email:</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="請輸入Email" value="{{email}}"
           required>
       </div>
 
       <div class="form-group col-12">
-        <label for="password" class="font-weight-bold">密碼:</label>
+        <label for="password" class="font-weight-bold">*密碼:</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="請輸入密碼"
           value="{{password}}" required>
       </div>
 
       <div class="form-group col-12">
-        <label for="confirm-password" class="font-weight-bold">確認密碼:</label>
+        <label for="confirm-password" class="font-weight-bold">*確認密碼:</label>
         <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="請再輸入一次密碼"
           value="{{confirmPassword}}" required>
       </div>
