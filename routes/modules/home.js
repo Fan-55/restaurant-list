@@ -4,7 +4,8 @@ const Restaurant = require('../../models/restaurant')
 const getCategoryList = require('../../utils/getCategoryList')
 
 router.get('/', (req, res, next) => {
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({ userId })
     .lean()
     .then((restaurants) => {
       const categoryList = getCategoryList(restaurants)
