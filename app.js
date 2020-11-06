@@ -31,6 +31,11 @@ app.use(session({
 require('./config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 app.use(routes)
 
 //error handling middlewares

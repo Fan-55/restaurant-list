@@ -24,9 +24,15 @@
         <a href="/users/register" class="btn btn-success">
           Register
         </a>
+        {{#if isAuthenticated}}
+        <a href="/users/logout" class="btn btn-success">
+          Logout
+        </a>
+        {{else}}
         <a href="/users/login" class="btn btn-success">
           Login
         </a>
+        {{/if}}
         <a href="/restaurants/new" class="btn btn-info"><i class="fas fa-plus"></i>
           Create
         </a>
