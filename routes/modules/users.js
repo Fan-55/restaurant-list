@@ -20,26 +20,50 @@ router.get('/register', (req, res, next) => {
 router.post('/register', (req, res, next) => {
   const { name, email, password, confirmPassword } = req.body
 
-  User.findOne({ email })
+  User
+    .findOne({ email })
     .then(user => {
+      const errors = {}
+
+      if (!email.trim()) {
+        errors.email = 'Email欄位不可空白。'
+      }
+      if (!password.trim()) {
+        errors.password = '密碼欄位不可空白。'
+      }
+      if (!confirmPassword.trim()) {
+        errors.confirmPassword = '確認密碼欄位不可空白。'
+      }
+      if (password !== confirmPassword) {
+        errors.isPasswordConfirmed = '密碼與確認密碼不相符。'
+      }
       if (user) {
-        console.log('User already exists')
-        res.render('register', { name, email, password, confirmPassword })
-      } else {
-        User.create({
+        errors.isEmailRegistered = '此Email已註冊過。'
+      }
+
+      if (Object.keys(errors).length) {
+        return res.render('register', { errors, name, email, password, confirmPassword })
+      }
+
+      return User
+        .create({
           name,
           email,
           password
         })
-          .then(() => res.redirect('/'))
-          .catch(err => console.log(err))
-      }
+        .then(() => {
+          req.flash('success_msg', '註冊成功，請登入。')
+          res.redirect('/users/login')
+        })
+        .catch(err => next(err))
+
     })
-    .catch(err => console.log(err))
+    .catch(err => next(err))
 })
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已經成功登出。')
   res.redirect('/users/login')
 })
 
