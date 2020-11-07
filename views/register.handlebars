@@ -13,7 +13,7 @@
       <div class="form-group col-12">
         <label for="email" class="font-weight-bold">*Email:</label>
         <input type="email"
-          class="form-control {{#if_multiConditions errors.email errors.isEmailRegistered}}is-invalid{{/if_multiConditions}}"
+          class="form-control {{#if_oneIsTrue errors.email errors.isEmailRegistered}}is-invalid{{/if_oneIsTrue}}"
           id="email" name="email" placeholder="請輸入Email" value="{{email}}" required>
         {{#if errors.email}}
         <div class="invalid-feedback">
@@ -41,7 +41,7 @@
       <div class="form-group col-12">
         <label for="confirm-password" class="font-weight-bold">*確認密碼:</label>
         <input type="password"
-          class="form-control {{#if_multiConditions errors.confirmPassword errors.isPasswordConfirmed}}is-invalid{{/if_multiConditions}}"
+          class="form-control {{#if_oneIsTrue errors.confirmPassword errors.isPasswordConfirmed}}is-invalid{{/if_oneIsTrue}}"
           id="confirm-password" name="confirmPassword" placeholder="請再輸入一次密碼" value="{{confirmPassword}}" required>
         {{#if errors.confirmPassword}}
         <div class="invalid-feedback">

@@ -14,9 +14,16 @@ module.exports = {
       return options.fn(this)
     }
   },
-  if_multiConditions: function (con1, con2, options) {
+  if_oneIsTrue: function (con1, con2, options) {
     if (con1 || con2) {
       return options.fn(this)
+    }
+  },
+  if_allTrue: function (con1, con2, options) {
+    if (con1 && con2) {
+      return options.fn(this)
+    } else {
+      return options.inverse(this)
     }
   }
 }

@@ -33,9 +33,11 @@
           Login
         </a>
         {{/if}}
+        {{#if isAuthenticated}}
         <a href="/restaurants/new" class="btn btn-info"><i class="fas fa-plus"></i>
           Create
         </a>
+        {{/if}}
       </div>
     </nav>
 

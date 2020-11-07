@@ -79,23 +79,44 @@ router.delete('/:id', (req, res, next) => {
     .catch(err => next(err))
 })
 
-//Route for sorting function
+//restaurants?keyword=...
+//restaurants?sort=...
+///restaurants?category=...
 router.get('/', (req, res, next) => {
-  const queryString = req.query.sort
-  const [target, method] = req.query.sort.split(':')
+  const getCategoryList = require('../../utils/getCategoryList')
+  const userId = req.user._id
+  const [type, typeName] = Object.entries(req.query)[0]
+
+  //for sorting function
   const filter = {}
-  filter[target] = method
-  Restaurant.find()
+  if (type === 'sort') {
+    const [sortTarget, method] = typeName.split(':')
+    filter[sortTarget] = method
+  }
+
+  Restaurant
+    .find({ userId })
     .lean()
-    .sort(filter)
-    .then((restaurants) => {
+    .sort(filter) //for sorting function
+    .then(restaurants => {
       const categoryList = getCategoryList(restaurants)
-      res.render('index', { layout: 'withSearchBar', restaurants, queryString, categoryList })
+
+      //for searching function
+      if (type === 'keyword') {
+        const keyword = typeName.trim()
+        const targets = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase()))
+        res.render('index', { layout: 'withSearchBar', restaurants: targets, categoryList })
+      }
+      //for filtering by category function
+      if (type === 'category') {
+        const targets = restaurants.filter(restaurant => restaurant.category === typeName)
+        res.render('index', { layout: 'withSearchBar', restaurants: targets, categoryList })
+      }
+
+      //for sorting function
+      res.render('index', { layout: 'withSearchBar', restaurants, queryString: typeName, categoryList })
     })
-    .catch(error => {
-      console.log(error)
-      next(error)
-    })
+    .catch(err => next(err))
 })
 
 module.exports = router

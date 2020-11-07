@@ -19,7 +19,11 @@
         <a class="navbar-brand" href="/">
           <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
+          {{#if_allTrue isAuthenticated user.name}}
+          {{user.name}}的餐廳清單
+          {{else}}
           我的餐廳清單
+          {{/if_allTrue}}
         </a>
         <a href="/users/register" class="btn btn-success">
           Register
@@ -33,9 +37,11 @@
           Login
         </a>
         {{/if}}
+        {{#if isAuthenticated}}
         <a href="/restaurants/new" class="btn btn-info"><i class="fas fa-plus"></i>
           Create
         </a>
+        {{/if}}
       </div>
     </nav>
 
@@ -46,7 +52,7 @@
     <div class="container search-bar">
       <div class="search-bar-outer">
         <div class="search-bar-inner">
-          <form action="/search">
+          <form action="/restaurants">
             <h4 class="mb-2">尋找餐廳：</h4>
             <div class="input-group">
               <input type="text" name="keyword" class="form-control" id="search-input" placeholder="輸入餐廳名稱"
@@ -63,7 +69,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {{#each categoryList}}
-              <a class="dropdown-item" href="/filter?category={{this}}">{{this}}</a>
+              <a class="dropdown-item" href="/restaurants?category={{this}}">{{this}}</a>
               {{/each}}
             </div>
           </div>
