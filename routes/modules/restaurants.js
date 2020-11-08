@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
-const getCategoryList = require('../../utils/getCategoryList')
 
 //get the restaurant creation page
 router.get('/new', (req, res, next) => {
@@ -10,11 +9,26 @@ router.get('/new', (req, res, next) => {
 
 //Create a new restaurant to the list
 router.post('/', (req, res, next) => {
+  const { name, location } = req.body
+  const errors = {}
+  if (!name.trim()) {
+    errors.name = '店名不可為空白。'
+  }
+  if (!location.trim()) {
+    errors.location = '地址不可為空白。'
+  }
+
+  if (Object.keys(errors).length) {
+    return res.render('new', { errors, restaurant: req.body })
+  }
   const restaurant = Object.assign({}, req.body)
   restaurant.userId = req.user._id
   Restaurant
     .create(restaurant)
-    .then(() => res.redirect('/'))
+    .then(() => {
+      req.flash('success_msg', `已新增${restaurant.name}至餐廳清單`)
+      res.redirect('/')
+    })
     .catch(err => next(err))
 })
 
@@ -64,7 +78,10 @@ router.put('/:id', (req, res, next) => {
       restaurant = Object.assign(restaurant, req.body)
       return restaurant.save()
     })
-    .then(() => res.redirect(`/restaurants/${_id}`))
+    .then((restaurant) => {
+      req.flash('success_msg', `已修改${restaurant.name}`)
+      res.redirect(`/restaurants/${_id}`)
+    })
     .catch(err => next(err))
 })
 
@@ -75,7 +92,10 @@ router.delete('/:id', (req, res, next) => {
   Restaurant
     .findOne({ _id, userId })
     .then(restaurant => restaurant.remove())
-    .then(() => res.redirect('/'))
+    .then((restaurant) => {
+      req.flash('success_msg', `已刪除${restaurant.name}`)
+      res.redirect('/')
+    })
     .catch(err => next(err))
 })
 
@@ -83,7 +103,6 @@ router.delete('/:id', (req, res, next) => {
 //restaurants?sort=...
 ///restaurants?category=...
 router.get('/', (req, res, next) => {
-  const getCategoryList = require('../../utils/getCategoryList')
   const userId = req.user._id
   const [type, typeName] = Object.entries(req.query)[0]
 
@@ -99,22 +118,20 @@ router.get('/', (req, res, next) => {
     .lean()
     .sort(filter) //for sorting function
     .then(restaurants => {
-      const categoryList = getCategoryList(restaurants)
-
       //for searching function
       if (type === 'keyword') {
         const keyword = typeName.trim()
         const targets = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase()))
-        res.render('index', { layout: 'withSearchBar', restaurants: targets, categoryList })
+        return res.render('index', { layout: 'withSearchBar', restaurants: targets })
       }
       //for filtering by category function
       if (type === 'category') {
         const targets = restaurants.filter(restaurant => restaurant.category === typeName)
-        res.render('index', { layout: 'withSearchBar', restaurants: targets, categoryList })
+        return res.render('index', { layout: 'withSearchBar', restaurants: targets })
       }
 
       //for sorting function
-      res.render('index', { layout: 'withSearchBar', restaurants, queryString: typeName, categoryList })
+      res.render('index', { layout: 'withSearchBar', restaurants, queryString: typeName })
     })
     .catch(err => next(err))
 })

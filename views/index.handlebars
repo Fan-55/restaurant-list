@@ -1,5 +1,6 @@
 <!-- restaurant list -->
 <div class="container mt-5">
+  {{> message}}
   <div class="row mb-3">
     <div class="col">
       <form action="/restaurants" id="sort-select" method="GET" class="d-flex justify-content-end">
@@ -47,7 +48,7 @@
   </div>
   {{#if_empty restaurants}}
   <div class="alert alert-primary" role="alert">
-    No Entries.
+    沒有餐廳在清單中
   </div>
   {{/if_empty}}
 </div>

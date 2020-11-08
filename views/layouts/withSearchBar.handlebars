@@ -25,22 +25,15 @@
           我的餐廳清單
           {{/if_allTrue}}
         </a>
-        <a href="/users/register" class="btn btn-success">
-          Register
-        </a>
         {{#if isAuthenticated}}
-        <a href="/users/logout" class="btn btn-success">
-          Logout
-        </a>
-        {{else}}
-        <a href="/users/login" class="btn btn-success">
-          Login
-        </a>
-        {{/if}}
-        {{#if isAuthenticated}}
-        <a href="/restaurants/new" class="btn btn-info"><i class="fas fa-plus"></i>
-          Create
-        </a>
+        <div class="user-function d-flex">
+          <a href="/users/logout" class="btn btn-danger mr-1">
+            登出
+          </a>
+          <a href="/restaurants/new" class="btn btn-success">
+            建立新餐廳
+          </a>
+        </div>
         {{/if}}
       </div>
     </nav>

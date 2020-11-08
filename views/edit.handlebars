@@ -1,12 +1,12 @@
 <h1 class="mb-1 restaurant-show-title">編輯餐廳:{{restaurant.name}}</h1>
 
 <form action="/restaurants/{{restaurant._id}}?_method=PUT" method="post" id="edit-form" class="mx-auto">
-  <small style="color:#4592af;">下列皆為必填欄位</small>
+  <small style="color:#4592af;">必填欄位*</small>
   <div class="container" id="edit-form-container">
     <div class="row">
 
       <div class="form-group col-12 col-md-6">
-        <label for="name" class="font-weight-bold">店名:</label>
+        <label for="name" class="font-weight-bold">*店名:</label>
         <input type="text" class="form-control" id="name" name="name" value="{{restaurant.name}}" placeholder="請輸入店名"
           required>
       </div>
@@ -14,29 +14,29 @@
       <div class="form-group col-12 col-md-6">
         <label for="name_en" class="font-weight-bold">英文店名:</label>
         <input type="text" class="form-control" id="name_en" name="name_en" value="{{restaurant.name_en}}"
-          placeholder="請輸入英文店名" required>
+          placeholder="請輸入英文店名">
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="phone" class="font-weight-bold">電話:</label>
-        <input type="text" class="form-control" id="phone" name="phone" value="{{restaurant.phone}}" placeholder="請輸入電話"
-          required>
+        <input type="text" class="form-control" id="phone" name="phone" value="{{restaurant.phone}}"
+          placeholder="請輸入電話">
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="category" class="font-weight-bold">餐廳種類:</label>
         <input type="text" class="form-control" id="category" name="category" value="{{restaurant.category}}"
-          placeholder="請輸入餐廳種類" required>
+          placeholder="請輸入餐廳種類">
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="rating" class="font-weight-bold">評分:</label>
         <input type="number" class="form-control" id="rating" name="rating" value="{{restaurant.rating}}"
-          placeholder="請輸入評分" required>
+          placeholder="請輸入評分">
       </div>
 
       <div class="form-group col-12">
-        <label for="location" class="font-weight-bold">地址:</label>
+        <label for="location" class="font-weight-bold">*地址:</label>
         <input type="text" class="form-control" id="location" name="location" value="{{restaurant.location}}"
           placeholder="請輸入地址" required>
       </div>
@@ -44,28 +44,27 @@
       <div class="form-group col-12">
         <label for="google_map" class="font-weight-bold">Google Maps URL:</label>
         <input type="text" class="form-control" id="google_map" name="google_map" value="{{restaurant.google_map}}"
-          placeholder="請輸入Google Maps URL" required>
+          placeholder="請輸入Google Maps URL">
       </div>
 
       <div class="form-group col-12">
         <label for="image" class="font-weight-bold">圖片URL:</label>
         <input type="text" class="form-control" id="image" name="image" value="{{restaurant.image}}"
-          placeholder="請輸入圖片URL" required>
+          placeholder="請輸入圖片URL">
       </div>
 
       <div class="form-group col-12">
         <label for="description" class="font-weight-bold">餐廳介紹:</label>
-        <textarea class="form-control" id="description" name="description" placeholder=" 請輸入餐廳介紹" rows="5"
-          required>{{restaurant.description}}</textarea>
+        <textarea class="form-control" id="description" name="description" placeholder=" 請輸入餐廳介紹"
+          rows="5">{{restaurant.description}}</textarea>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary d-block mx-auto" onclick="return confirm('確定修改該筆餐廳資料?')">Save
-      Changes</button>
+    <button type="submit" class="btn btn-primary d-block mx-auto" onclick="return confirm('確定修改該筆餐廳資料?')">儲存更變</button>
 
   </div>
 </form>
 
 <div class="wrapper mt-2 mb-5 text-center">
-  <a href="/" class="btn btn-danger" onclick="return confirm('確定要放棄編輯嗎?')">Back to home page</a>
+  <a href="/" class="btn btn-danger" onclick="return confirm('確定要放棄編輯嗎?')">回到清單</a>
 </div>

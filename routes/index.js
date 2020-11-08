@@ -7,10 +7,11 @@ const users = require('./modules/users')
 const auth = require('./modules/auth')
 
 const { authenticator } = require('../middleware/auth')
+const getCategoryList = require('../middleware/getCategoryList')
 
 router.use('/users', users)
 router.use('/auth', auth)
-router.use('/restaurants', authenticator, restaurants)
-router.use('/', authenticator, home)
+router.use('/restaurants', authenticator, getCategoryList, restaurants)
+router.use('/', authenticator, getCategoryList, home)
 
 module.exports = router

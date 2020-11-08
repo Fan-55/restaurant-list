@@ -1,63 +1,80 @@
 <h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
 
 <form action="/restaurants" method="post" id="new-form" class="mx-auto">
-  <small style="color:#4592af;">下列皆為必填欄位</small>
+  <small style="color:#4592af;">必填欄位*</small>
   <div class="container" id="new-form-container">
     <div class="row">
 
       <div class="form-group col-12 col-md-6">
-        <label for="name" class="font-weight-bold">店名:</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="請輸入店名" required>
+        <label for="name" class="font-weight-bold">*店名:</label>
+        <input type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" id="name" name="name"
+          placeholder="請輸入店名" value="{{restaurant.name}}" required>
+        {{#if errors.name}}
+        <div class="invalid-feedback">
+          {{errors.name}}
+        </div>
+        {{/if}}
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="name_en" class="font-weight-bold">英文店名:</label>
-        <input type="text" class="form-control" id="name_en" name="name_en" placeholder="請輸入英文店名" required>
+        <input type="text" class="form-control" id="name_en" name="name_en" placeholder="請輸入英文店名"
+          value={{restaurant.name_en}}>
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="phone" class="font-weight-bold">電話:</label>
-        <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入電話" required>
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入電話"
+          value="{{restaurant.phone}}">
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="category" class="font-weight-bold">餐廳種類:</label>
-        <input type="text" class="form-control" id="category" name="category" placeholder="請輸入餐廳種類" required>
+        <input type="text" class="form-control" id="category" name="category" placeholder="請輸入餐廳種類"
+          value="{{restaurant.category}}">
       </div>
 
       <div class="form-group col-12 col-md-6">
         <label for="rating" class="font-weight-bold">評分:</label>
-        <input type="number" class="form-control" id="rating" name="rating" placeholder="請輸入評分" required>
+        <input type="number" class="form-control" id="rating" name="rating" placeholder="請輸入評分"
+          value="{{restaurant.rating}}">
       </div>
 
       <div class="form-group col-12">
-        <label for="location" class="font-weight-bold">地址:</label>
-        <input type="text" class="form-control" id="location" name="location" placeholder="請輸入地址" required>
+        <label for="location" class="font-weight-bold">*地址:</label>
+        <input type="text" class="form-control {{#if errors.location}}is-invalid{{/if}}" id="location" name="location"
+          placeholder="請輸入地址" value="{{restaurant.location}}" required>
+        {{#if errors.location}}
+        <div class="invalid-feedback">
+          {{errors.location}}
+        </div>
+        {{/if}}
       </div>
 
       <div class="form-group col-12">
         <label for="google_map" class="font-weight-bold">Google Maps URL:</label>
         <input type="text" class="form-control" id="google_map" name="google_map" placeholder="請輸入Google Maps URL"
-          required>
+          value="{{restaurant.google_map}}">
       </div>
 
       <div class="form-group col-12">
         <label for="image" class="font-weight-bold">圖片URL:</label>
-        <input type="text" class="form-control" id="image" name="image" placeholder="請輸入圖片URL" required>
+        <input type="text" class="form-control" id="image" name="image" placeholder="請輸入圖片URL"
+          value="{{restaurant.image}}">
       </div>
 
       <div class="form-group col-12">
         <label for="description" class="font-weight-bold">餐廳介紹:</label>
-        <textarea class="form-control" id="description" name="description" placeholder="請輸入餐廳介紹" rows="5"
-          required></textarea>
+        <textarea class="form-control" id="description" name="description" placeholder="請輸入餐廳介紹"
+          rows="5">{{restaurant.description}}</textarea>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary d-block mx-auto" onclick="return confirm('確定加入清單?')">Add</button>
+    <button type="submit" class="btn btn-primary d-block mx-auto" onclick="return confirm('確定加入清單?')">新增</button>
 
   </div>
 </form>
 
 <div class="wrapper mt-2 mb-5 text-center">
-  <a href="/" class="btn btn-danger" onclick="return confirm('確定要放棄編輯嗎?')">Back to home page</a>
+  <a href="/" class="btn btn-danger" onclick="return confirm('確定要放棄編輯嗎?')">回到清單</a>
 </div>

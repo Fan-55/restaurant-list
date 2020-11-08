@@ -1,20 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
-const getCategoryList = require('../../utils/getCategoryList')
 
 router.get('/', (req, res, next) => {
   const userId = req.user._id
   Restaurant.find({ userId })
     .lean()
     .then((restaurants) => {
-      const categoryList = getCategoryList(restaurants)
-      res.render('index', { layout: 'withSearchBar', restaurants, categoryList })
+      res.render('index', { layout: 'withSearchBar', restaurants })
     })
-    .catch(error => {
-      console.log(error)
-      next(error)
-    })
+    .catch(err => next(err))
 })
 
 module.exports = router
