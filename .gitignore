@@ -14,5 +14,5 @@ node_modules
 *.gz
 
 #others
-User Story.docx
-~$er Story.docx
+.env
+.gitignore
