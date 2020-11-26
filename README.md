@@ -1,4 +1,4 @@
-## Restaurant List
+SKIP## Restaurant List
 
 This is a web application for you to list whatever restaurant you like.  
 
@@ -34,7 +34,7 @@ Try it on heroku [click here](https://mysterious-atoll-13835.herokuapp.com/users
 - install [Robo 3T](https://robomongo.org/)
 - start the MongoDB server
 - create a MongoDB connection
-- create a database named "restaurant-list"
+- create a database named `restaurant-list`
 
 1. Clone this repository 
 
@@ -53,13 +53,21 @@ $ cd restaurant-list
 ```
 $ npm install
 ```
+4. Rename the `.env.example` file to `.env`
 
-4. Implant seed data
+For FACEBOOK_ID and FACEBOOK_SECRET in `.env`, go to [FACEBOOK for Developers](https://developers.facebook.com/) to create your own app. Then, add `Facebook Login` product to your app. Finally, replace the value of FACEBOOK_ID and FACEBOOK_SECRET with your own the App ID and App Secret respectively.
+
+5. Implant seed data
 ```
 $ npm run seed
 ```
+Once seed data is implanted, you will see the following on the terminal. Otherwise, errors will be shown on the terminal.
+```
+mongodb connected!
+Seeds created!
+```
 
-5. Execute app via either nodemon or node
+6. Execute app via either nodemon or node
 
 - via nodemon
 
@@ -73,19 +81,19 @@ $ npm run dev
 $ npm run start
 ```
 
-6. You will see the following on your terminal suggesting successful set up
+7. You will see the following on your terminal suggesting successful set up
 
 ```
 This app is listening at http://localhost:3000
 mongodb connected!
 ```
-7. Open the browser and type in the following URL
+8. Open the browser and type in the following URL
 
 ```
 http://localhost:3000/users/login
 ```
 
-8. Use the following seed user data to log in or create your own account
+9. Use the following seed user data to log in or create your own account
 
 | Email | password |
 | ------ | ------ |
